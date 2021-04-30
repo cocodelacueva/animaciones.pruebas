@@ -5,38 +5,60 @@ import './assets/css/style.scss';
 //import animationsCSS from './assets/js/animations-css';
 
 (function init() {
-    const siteWrapper = document.querySelector('.site-wrapper');
-    
-    if (siteWrapper) {
+  const siteWrapper = document.querySelector('.site-wrapper');
 
-        //do
-        console.log('This site is loaded');
+  if (siteWrapper) {
 
-        //legales modal
-        //legalesModal(siteWrapper);
+    //do
 
-        //lazyloadimages
-        // window.addEventListener('load', function(){
-        //     const configImages = {
-        //         contenedor: siteWrapper,//nodo contenedor
-        //         claseContenedora: '.lazy-load-image',
-        //         dimensiones : {
-        //             mobile: 50,
-        //             tablet: 768,
-        //             desktop: 992,
-        //         }
-        //     }
-        //     lazyLoadImages(configImages);
-        // });
+    const html = document.documentElement;
+    const canvas = document.getElementById('hero-lightpass');
+    const context = canvas.getContext('2d');
 
-        //animations on view:
-        // const animates = document.querySelectorAll('.animate');
-        // if (animates.length > 0) {
-        //     animationsCSS(animates);
-        // }
+    const frameCount = 50;
+    const currentFrame = (index) => (
+      `assets/images/frames/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`
+    );
 
-    } else {
-        //reload
-        setTimeout(init, 1000);
-    }
+    const preloadImages = () => {
+      for (let i = 1; i < frameCount; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
+      }
+    };
+
+    const img = new Image();
+    img.src = currentFrame(1);
+    canvas.width = 1158;
+    canvas.height = 770;
+    img.onload = function () {
+      context.drawImage(img, 0, 0);
+    };
+
+    const updateImage = (index) => {
+      img.src = currentFrame(index);
+      context.drawImage(img, 0, 0);
+
+      canvas.style.opacity = (index * 20 / 1000 - 1) * -1;
+    };
+
+    window.addEventListener('scroll', () => {
+      console.log('scrllin');
+      const { scrollTop } = html;
+      const maxScrollTop = html.scrollHeight - window.innerHeight;
+      const scrollFraction = scrollTop / maxScrollTop;
+      const frameIndex = Math.min(
+        frameCount - 1,
+        Math.ceil(scrollFraction * frameCount),
+      );
+
+      requestAnimationFrame(() => updateImage(frameIndex + 1));
+    });
+
+    preloadImages();
+
+  } else {
+    //reload
+    setTimeout(init, 1000);
+  }
 })();

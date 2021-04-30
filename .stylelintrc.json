@@ -5,7 +5,7 @@
     "extends": "stylelint-config-standard",
     "defaultSeverity": "warning",
     "rules": {
-      "indentation": [4, {"severity":"error"}],
+      "indentation": [4 {"severity":"warning"}],
       "at-rule-no-unknown": null,
       "no-extra-semicolons": true,
       "no-empty-source": true,

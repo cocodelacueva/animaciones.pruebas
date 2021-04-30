@@ -1,7 +1,29 @@
 @charset "UTF-8";
 
-@import 'sass/fonts';
+//@import 'sass/fonts';
 @import 'sass/variables';
+
+// html {
+//     height: 100vh;
+//   }
+  
+//   body {
+//     background: #000;
+//     height: 500vh;
+//   }
+
+//   canvas {
+//     position: fixed;
+//     left: 50%;
+//     top: 50%;
+//     max-height: 100vh;
+//     max-width: 100vw;
+//     transform: translate(-50%, -50%);
+//   }
+
+html {
+    height: 100vw;
+}
 
 .site-wrapper {
     @import 'sass/reset';
@@ -17,18 +39,29 @@
     font-size: $fontSizeBase;
     line-height: $lineHeightBase;
     font-weight: 400;
-    background-color: $color-blanco;
-    color: $color-negro;
+    background-color: $color-negro;
+    color: $color-blanco;
     overflow: hidden;
-    scroll-behavior: smooth;
+    //scroll-behavior: smooth;
+    height: 500vh;
 }//.main-wrapper
 
 
 .site-wrapper {
-    @import 'sass/breakpoints';
-    @import 'sass/mixins';
-    @import 'sass/helpers';
-    @import 'sass/header';
-    @import 'sass/main';
-    @import 'sass/footer';
+    // @import 'sass/breakpoints';
+    // @import 'sass/mixins';
+    // @import 'sass/helpers';
+    // @import 'sass/header';
+    // @import 'sass/main';
+    // @import 'sass/footer';
+ 
+    canvas {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        max-height: 100vh;
+        max-width: 100vw;
+        transform: translate(-50%, -50%);
+    }
+    
 }
